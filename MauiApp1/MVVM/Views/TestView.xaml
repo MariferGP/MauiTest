@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:local="clr-namespace:MauiApp1.Controls"
+             x:Class="MauiApp1.MVVM.Views.TestView"
+             Title="Back"
+             NavigationPage.HasNavigationBar="True">
+    <VerticalStackLayout Margin="15">
+        <!--#region Client -->
+        <HorizontalStackLayout Spacing="5">
+            <Label Text="Cliente" FontAttributes="Bold" VerticalOptions="Center" Margin="0,0,0,15"/>
+        </HorizontalStackLayout>
+        <Frame HeightRequest="40" CornerRadius="0" BorderColor="{StaticResource AssembleGray}" Padding="0">
+            <local:ac_Client x:Name="uo_client" TextChanged="ue_ClientEntry_TextChanged" SuggestionItemSelected="ue_ClientEntry_OnSuggestionItemSelected">
+                <telerik:RadAutoComplete.SuggestionItemTemplate>
+                    <DataTemplate>
+                        <telerik:RadHighlightLabel TextColor="{StaticResource AssembleDarkBlue}" Padding="10"
+                         HighlightTextColor="{StaticResource AssembleLightBlue}"
+                         UnformattedText="{Binding s_DenominacionSocial}"
+                         HighlightText="{Binding Source={x:Reference uo_ClientEntry}, Path=Text}" />
+                    </DataTemplate>
+                </telerik:RadAutoComplete.SuggestionItemTemplate>
+                <telerik:RadAutoComplete.LoadingTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout HorizontalOptions="Center" Margin="15">
+                            <Label Text="Buscando... " 
+                         FontSize="16" 
+                         TextColor="{StaticResource AssembleGray}"/>
+                            <telerik:RadBusyIndicator x:Name="uo_busyIndicator" 
+                          HeightRequest="24" 
+                          WidthRequest="24"
+                          IsBusy="True"
+                          VerticalOptions="Start"
+                          AnimationContentColor="{StaticResource AssembleLightBlue}"
+                          AnimationType="Animation9"/>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </telerik:RadAutoComplete.LoadingTemplate>
+                <telerik:RadAutoComplete.NoResultsTemplate>
+                    <DataTemplate>
+                        <Label Text="No se obtuvieron resultados para la búsqueda."
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"/>
+                    </DataTemplate>
+                </telerik:RadAutoComplete.NoResultsTemplate>
+            </local:ac_Client>
+        </Frame>
+        <!--#endregion-->
+    </VerticalStackLayout>
+</ContentPage>
